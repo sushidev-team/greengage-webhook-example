@@ -1,0 +1,54 @@
+<html>
+    <body>
+        <script src="https://unpkg.com/alpinejs" defer></script>
+        <script>
+
+            function webhookObject(){
+
+                return {
+                    trigger: async () => {
+
+                        const dataObject = { 
+                            "origin": "mindearth", 
+                            "data": { 
+                                "name":"Test", 
+                                "starting_point" : [45.46464374888545, 9.18934835519496], 
+                                "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using <Content here, content here>, making it look like readable English.", 
+                                "duration_min": 5, 
+                                "distance_mt": 1200 
+                            } 
+                        };
+                        
+                        async function postData(url = "", data = {}) {
+                        // Default options are marked with *
+                            const response = await fetch(url, {
+                                method: "POST", 
+                                mode: "cors", 
+                                cache: "no-cache", 
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": "SECRET_KEY",
+                                    "Origin": "http://localhost:3000",
+                                },
+                                redirect: "follow", 
+                                referrerPolicy: "no-referrer", 
+                                body: JSON.stringify(data), 
+                            });
+                            return response.json();
+                        }
+
+                        const result = await postData("https://api-stage.greengage.dev/webhooks", dataObject);
+                        alert(`Mission Id: ${result?.id}`);
+
+                    },
+                    result: null
+                }
+
+            }
+
+        </script>
+        <div x-data="webhookObject">
+            <button @click="trigger">Trigger Webhook</button>
+        </div>
+    </body>
+</html>
