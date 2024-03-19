@@ -31,7 +31,7 @@ npm i && npx http-server -p 3000
 curl --location --request POST 'https://api-stage.greengage.dev/webhooks' \
 --header 'Authorization: SECRET_KEY' \
 --header 'Content-Type: application/json' \
---data-raw '{ "origin":"mindearth", "type": "update", "data": { "external_id", "status": "pending" } }'
+--data-raw '{ "origin":"mindearth", "type": "update", "data": { "external_id": "18", "status": "pending" } }'
 ```
 
 Possible status updates:
